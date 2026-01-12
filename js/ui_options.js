@@ -39,7 +39,7 @@ export function wireOptionsUI(appState, onApply) {
     const bgWrap = document.createElement("div");
     bgWrap.style.display = "grid";
     bgWrap.style.gridTemplateColumns = "repeat(3, 1fr)";
-    bgWrap.style.gap = "0px";
+    bgWrap.style.gap = "12px";
     const bgLabels = ["R", "G", "B"];
     const bgInputs = temp.bg.map((value) => makeNumberInput(0, 255, 1, value));
     const bgValue = document.createElement("div");
