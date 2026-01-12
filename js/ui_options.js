@@ -89,13 +89,17 @@ export function wireOptionsUI(appState, onApply) {
 
     const footer = document.createElement("div");
     const cancelBtn = document.createElement("button");
-    cancelBtn.className = "btn btn-ghost";
+    cancelBtn.className = "btn";
     cancelBtn.textContent = "キャンセル";
-    cancelBtn.addEventListener("click", closeModal);
+    cancelBtn.style.background = "rgb(200, 200, 200)";
+    cancelBtn.style.borderColor = "rgb(200, 200, 200)";
+    cancelBtn.style.color = "#111";
+
     const okBtn = document.createElement("button");
     okBtn.className = "btn btn-primary";
     okBtn.textContent = "OK";
-    okBtn.addEventListener("click", () => {
+
+    const applyOptions = () => {
       appState.options.bg = [...temp.bg];
       appState.options.tolerance = temp.tolerance;
       appState.options.strength = temp.strength;
@@ -103,8 +107,32 @@ export function wireOptionsUI(appState, onApply) {
       if (typeof onApply === "function") {
         onApply();
       }
-    });
-    footer.append(cancelBtn, okBtn);
+    };
+
+    okBtn.addEventListener("click", applyOptions);
+    cancelBtn.addEventListener("click", closeModal);
+
+    const okWidth = okBtn.getBoundingClientRect().width;
+    if (okWidth > 0) {
+      cancelBtn.style.width = `${okWidth}px`;
+    } else {
+      cancelBtn.style.minWidth = "88px";
+      okBtn.style.minWidth = "88px";
+    }
+
+    footer.append(okBtn, cancelBtn);
+
+    const onKeyDown = (event) => {
+      if (event.key === "Enter") {
+        event.preventDefault();
+        applyOptions();
+      }
+      if (event.key === "Escape") {
+        event.preventDefault();
+        closeModal();
+      }
+    };
+    document.addEventListener("keydown", onKeyDown, { once: true });
 
     openModal({ title: "オプション", body, footer });
   });
