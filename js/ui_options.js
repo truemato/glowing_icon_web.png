@@ -39,13 +39,13 @@ export function wireOptionsUI(appState, onApply) {
     const bgWrap = document.createElement("div");
     bgWrap.style.display = "grid";
     bgWrap.style.gridTemplateColumns = "repeat(3, 1fr)";
-    bgWrap.style.gap = "6px";
+    bgWrap.style.gap = "0px";
     const bgLabels = ["R", "G", "B"];
     const bgInputs = temp.bg.map((value) => makeNumberInput(0, 255, 1, value));
     const bgValue = document.createElement("div");
     bgValue.textContent = temp.bg.join(", ");
     bgInputs.forEach((input, index) => {
-      input.style.width = "64px";
+      input.style.width = "44px";
       input.addEventListener("input", () => {
         const value = clamp(Number(input.value), 0, 255);
         input.value = String(value);
@@ -55,7 +55,8 @@ export function wireOptionsUI(appState, onApply) {
       const inputWrap = document.createElement("div");
       inputWrap.style.display = "flex";
       inputWrap.style.alignItems = "center";
-      inputWrap.style.gap = "4px";
+      inputWrap.style.gap = "0px";
+      inputWrap.style.columnGap = "0px";
       const label = document.createElement("span");
       label.textContent = bgLabels[index];
       inputWrap.append(label, input);
@@ -68,6 +69,7 @@ export function wireOptionsUI(appState, onApply) {
     tolInput.max = "255";
     tolInput.step = "1";
     tolInput.value = String(temp.tolerance);
+    tolInput.style.width = "calc(100% - 60px)";
     const tolValue = document.createElement("div");
     tolValue.textContent = tolInput.value;
     tolInput.addEventListener("input", () => {
@@ -82,6 +84,7 @@ export function wireOptionsUI(appState, onApply) {
     strengthInput.max = "2";
     strengthInput.step = "0.01";
     strengthInput.value = String(temp.strength);
+    strengthInput.style.width = "calc(100% - 60px)";
     const strengthValue = document.createElement("div");
     strengthValue.textContent = strengthInput.value;
     strengthInput.addEventListener("input", () => {
@@ -97,16 +100,25 @@ export function wireOptionsUI(appState, onApply) {
     );
 
     const footer = document.createElement("div");
+    footer.style.display = "flex";
+    footer.style.justifyContent = "flex-end";
+    footer.style.gap = "20px";
     const cancelBtn = document.createElement("button");
     cancelBtn.className = "btn";
     cancelBtn.textContent = "キャンセル";
     cancelBtn.style.background = "rgb(200, 200, 200)";
     cancelBtn.style.borderColor = "rgb(200, 200, 200)";
     cancelBtn.style.color = "#111";
+    cancelBtn.style.minWidth = "120px";
+    cancelBtn.style.height = "36px";
+    cancelBtn.style.justifyContent = "center";
 
     const okBtn = document.createElement("button");
     okBtn.className = "btn btn-primary";
     okBtn.textContent = "OK";
+    okBtn.style.minWidth = "120px";
+    okBtn.style.height = "36px";
+    okBtn.style.justifyContent = "center";
 
     const applyOptions = () => {
       appState.options.bg = [...temp.bg];
@@ -120,14 +132,6 @@ export function wireOptionsUI(appState, onApply) {
 
     okBtn.addEventListener("click", applyOptions);
     cancelBtn.addEventListener("click", closeModal);
-
-    const okWidth = okBtn.getBoundingClientRect().width;
-    if (okWidth > 0) {
-      cancelBtn.style.width = `${okWidth}px`;
-    } else {
-      cancelBtn.style.minWidth = "88px";
-      okBtn.style.minWidth = "88px";
-    }
 
     footer.append(okBtn, cancelBtn);
 
