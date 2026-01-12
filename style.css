@@ -97,6 +97,12 @@ body {
   height: auto;
 }
 
+.arrowWrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 
 .orImg {
   width: calc(360px * var(--ui-scale) * 0.67);
@@ -151,7 +157,7 @@ body {
 .modalBody { margin-bottom: 12px; }
 .modalFooter { display:flex; gap:8px; justify-content:flex-end; }
 
-@media (max-width: 960px) {
+@media (max-width: 768px) {
   .titleImg { width: 90%; }
   .actionRow { gap: 14px; }
   .label-desktop { display: none; }
@@ -163,4 +169,14 @@ body {
   .drop { display: none; }
   .preview { height: 180px; }
   .arrowImg { width: 80px; }
+}
+
+@media (max-width: 550px) {
+  .previewRow {
+    flex-direction: column;
+    align-items: center;
+  }
+  .arrowImg {
+    width: 90px;
+  }
 }

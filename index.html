@@ -38,7 +38,10 @@
         <img id="imgBefore" class="preview" src="./assets/samples/input.png" alt="Before preview" />
       </div>
 
-      <img class="arrowImg" src="./assets/ui/arrow.png" alt="→" />
+      <picture class="arrowWrap">
+        <source media="(max-width: 550px)" srcset="./assets/ui/arrow_down.png" />
+        <img class="arrowImg" src="./assets/ui/arrow.png" alt="→" />
+      </picture>
 
       <div class="previewBlock">
         <img id="imgAfter" class="preview" src="./assets/samples/output.png" alt="After preview" />
