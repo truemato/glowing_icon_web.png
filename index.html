@@ -7,42 +7,49 @@
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
-  <header class="top">
-    <button id="btnOpen" class="btn">コンピュータから開く</button>
-
-    <div class="spacer"></div>
-
+  <header class="topbar">
     <button id="btnOptions" class="btn btn-ghost">オプション</button>
+    <div class="topbarSpacer"></div>
     <a id="bugLink" class="btn btn-ghost" target="_blank" rel="noreferrer">バグを報告</a>
-
-    <input id="fileInput" type="file" accept="image/png" hidden />
   </header>
 
   <main class="wrap">
-    <section id="dropZone" class="drop">
-      <div class="dropText">
-        <div class="dropTitle">Drop any files here</div>
-        <div class="dropSub">PNG 1枚【最大100MB】</div>
+    <div class="titleWrap">
+      <img class="titleImg" src="./assets/ui/glowing_icon.png" alt="GLOWING_ICON" />
+    </div>
+
+    <section class="actionRow">
+      <button id="btnOpen" class="btn btn-open">
+        <span class="btnIcon" aria-hidden="true"></span>
+        <span class="label-desktop">コンピュータから開く</span>
+        <span class="label-mobile">フォトを開く</span>
+      </button>
+
+      <img class="orImg" src="./assets/ui/or.png" alt="OR" />
+
+      <div id="dropZone" class="drop">
+        <div class="dropText">Drop PNG file here</div>
       </div>
     </section>
 
-    <section class="grid">
-      <div class="panel">
-        <div class="panelTitle">変換元（Before）</div>
-        <img id="imgBefore" class="preview" alt="Before preview" />
+    <section class="previewRow">
+      <div class="previewBlock">
+        <img id="imgBefore" class="preview" src="./assets/samples/input.png" alt="Before preview" />
       </div>
 
-      <div class="panel">
-        <div class="panelTitle">変換先（After）</div>
-        <img id="imgAfter" class="preview" alt="After preview" />
-        <div class="actions">
-          <a id="downloadLink" class="btn btn-primary" download="converted.png">ダウンロード</a>
-          <div class="hint">スマホ：画像を長押し→保存（機種によって表示が異なります）
-          </div>
-        </div>
+      <img class="arrowImg" src="./assets/ui/arrow.png" alt="→" />
+
+      <div class="previewBlock">
+        <img id="imgAfter" class="preview" src="./assets/samples/output.png" alt="After preview" />
       </div>
     </section>
+
+    <div class="saveHint">
+      <img src="./assets/ui/long_press.png" alt="↑の画像を長押しで保存してください" />
+    </div>
   </main>
+
+  <input id="fileInput" type="file" accept="image/png" hidden />
 
   <!-- モーダル（共通） -->
   <div id="modalBackdrop" class="backdrop hidden">
@@ -53,6 +60,6 @@
     </div>
   </div>
 
-  <script type="module" src="./main.js"></script>
+  <script type="module" src="./js/main.js"></script>
 </body>
 </html>
