@@ -5,7 +5,7 @@ import { clamp } from "./utils.js";
 function makeRow(labelText, inputEl, valueEl) {
   const row = document.createElement("div");
   row.style.display = "grid";
-  row.style.gridTemplateColumns = "120px 1fr 150px";
+  row.style.gridTemplateColumns = "120px 1fr 90px";
   row.style.alignItems = "center";
   row.style.gap = "8px";
   const label = document.createElement("div");
@@ -40,17 +40,26 @@ export function wireOptionsUI(appState, onApply) {
     bgWrap.style.display = "grid";
     bgWrap.style.gridTemplateColumns = "repeat(3, 1fr)";
     bgWrap.style.gap = "6px";
+    const bgLabels = ["R", "G", "B"];
     const bgInputs = temp.bg.map((value) => makeNumberInput(0, 255, 1, value));
     const bgValue = document.createElement("div");
     bgValue.textContent = temp.bg.join(", ");
     bgInputs.forEach((input, index) => {
+      input.style.width = "64px";
       input.addEventListener("input", () => {
         const value = clamp(Number(input.value), 0, 255);
         input.value = String(value);
         temp.bg[index] = value;
         bgValue.textContent = temp.bg.join(", ");
       });
-      bgWrap.appendChild(input);
+      const inputWrap = document.createElement("div");
+      inputWrap.style.display = "flex";
+      inputWrap.style.alignItems = "center";
+      inputWrap.style.gap = "4px";
+      const label = document.createElement("span");
+      label.textContent = bgLabels[index];
+      inputWrap.append(label, input);
+      bgWrap.appendChild(inputWrap);
     });
 
     const tolInput = document.createElement("input");
