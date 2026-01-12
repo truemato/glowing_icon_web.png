@@ -3,7 +3,7 @@ import { dom } from "./dom.js";
 import { appState } from "./state.js";
 import { wireModals } from "./ui_modal.js";
 import { wireOptionsUI } from "./ui_options.js";
-import { showFatal, showError, showProcessing, hideProcessing } from "./ui_errors.js";
+import { showFatal, showError } from "./ui_errors.js";
 import { validateFileOrThrow } from "./validators.js";
 import { loadImageFromFile, setImgSrc, setDownloadFromBlob } from "./image_io.js";
 import { convertToCanvas } from "./converter.js";
@@ -12,7 +12,11 @@ import { insertICCPIntoPngBlob } from "./png_chunk.js";
 
 async function bootstrap() {
   wireModals();
-  wireOptionsUI(appState);
+  wireOptionsUI(appState, () => {
+    if (appState.lastFile) {
+      handleFile(appState.lastFile);
+    }
+  });
 
   dom.bugLink.href = CFG.BUG_REPORT_URL;
 
@@ -58,9 +62,8 @@ function disableInputs() {
 }
 
 async function handleFile(file) {
-  showProcessing();
-  let success = false;
   try {
+    appState.lastFile = file;
     validateFileOrThrow(file, CFG);
 
     // Before表示
@@ -86,15 +89,9 @@ async function handleFile(file) {
     const afterUrl = URL.createObjectURL(outBlob);
     setImgSrc(dom.imgAfter, afterUrl);
     setDownloadFromBlob(dom.downloadLink, outBlob, "output.png");
-    success = true;
   } catch (e) {
-    hideProcessing();
     showError(String(e?.message ?? e));
     return;
-  } finally {
-    if (success) {
-      hideProcessing();
-    }
   }
 }
 

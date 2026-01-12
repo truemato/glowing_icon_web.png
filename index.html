@@ -3,7 +3,8 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width,initial-scale=1" />
-  <title>Glowing Icon Converter</title>
+  <title>glowing_icon</title>
+  <link rel="icon" href="./favicon.png" type="image/png" />
   <link rel="stylesheet" href="./style.css" />
 </head>
 <body>
@@ -22,7 +23,7 @@
       <button id="btnOpen" class="btn btn-open">
         <span class="btnIcon" aria-hidden="true"></span>
         <span class="label-desktop">コンピュータから開く</span>
-        <span class="label-mobile">フォトを開く</span>
+        <span class="label-mobile">ファイルを選択</span>
       </button>
 
       <img class="orImg" src="./assets/ui/or.png" alt="OR" />
@@ -44,9 +45,6 @@
       </div>
     </section>
 
-    <div class="saveHint">
-      <img src="./assets/ui/long_press.png" alt="↑の画像を長押しで保存してください" />
-    </div>
   </main>
 
   <input id="fileInput" type="file" accept="image/png" hidden />

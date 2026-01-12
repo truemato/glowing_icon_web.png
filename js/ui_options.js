@@ -5,7 +5,7 @@ import { clamp } from "./utils.js";
 function makeRow(labelText, inputEl, valueEl) {
   const row = document.createElement("div");
   row.style.display = "grid";
-  row.style.gridTemplateColumns = "120px 1fr 60px";
+  row.style.gridTemplateColumns = "120px 1fr 150px";
   row.style.alignItems = "center";
   row.style.gap = "8px";
   const label = document.createElement("div");
@@ -24,7 +24,7 @@ function makeNumberInput(min, max, step, value) {
   return input;
 }
 
-export function wireOptionsUI(appState) {
+export function wireOptionsUI(appState, onApply) {
   dom.btnOptions.addEventListener("click", () => {
     const temp = {
       bg: [...appState.options.bg],
@@ -70,13 +70,13 @@ export function wireOptionsUI(appState) {
     const strengthInput = document.createElement("input");
     strengthInput.type = "range";
     strengthInput.min = "0";
-    strengthInput.max = "1";
+    strengthInput.max = "2";
     strengthInput.step = "0.01";
     strengthInput.value = String(temp.strength);
     const strengthValue = document.createElement("div");
     strengthValue.textContent = strengthInput.value;
     strengthInput.addEventListener("input", () => {
-      const value = clamp(Number(strengthInput.value), 0, 1);
+      const value = clamp(Number(strengthInput.value), 0, 2);
       temp.strength = value;
       strengthValue.textContent = value.toFixed(2);
     });
@@ -100,9 +100,12 @@ export function wireOptionsUI(appState) {
       appState.options.tolerance = temp.tolerance;
       appState.options.strength = temp.strength;
       closeModal();
+      if (typeof onApply === "function") {
+        onApply();
+      }
     });
     footer.append(cancelBtn, okBtn);
 
-    openModal({ title: "Options", body, footer });
+    openModal({ title: "オプション", body, footer });
   });
 }

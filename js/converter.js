@@ -14,7 +14,7 @@ export function convertToCanvas(img, bg, tolerance, strength) {
   const [br, bgc, bb] = bg;
   const tol = clamp(tolerance, 0, 255);
   const tol2 = tol * tol;
-  const strengthClamped = clamp(strength, 0, 1);
+  const strengthClamped = clamp(strength, 0, 2);
 
   for (let i = 0; i < data.length; i += 4) {
     const r = data[i];
