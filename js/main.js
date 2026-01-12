@@ -75,8 +75,8 @@ function disableInputs() {
 
 async function handleFile(file) {
   try {
-    appState.lastFile = file;
     validateFileOrThrow(file, CFG);
+    appState.lastFile = file;
 
     // Before表示
     const beforeUrl = URL.createObjectURL(file);
