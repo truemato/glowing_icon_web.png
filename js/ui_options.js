@@ -5,7 +5,7 @@ import { clamp } from "./utils.js";
 function makeRow(labelText, inputEl, valueEl) {
   const row = document.createElement("div");
   row.style.display = "grid";
-  row.style.gridTemplateColumns = "120px 1fr 90px";
+  row.style.gridTemplateColumns = "90px 1fr 90px";
   row.style.alignItems = "center";
   row.style.gap = "8px";
   const label = document.createElement("div");

@@ -8,7 +8,6 @@ export const dom = {
   dropZone: byId("dropZone"),
   imgBefore: byId("imgBefore"),
   imgAfter: byId("imgAfter"),
-  downloadLink: byId("downloadLink"),
   modalBackdrop: byId("modalBackdrop"),
   modalTitle: byId("modalTitle"),
   modalBody: byId("modalBody"),

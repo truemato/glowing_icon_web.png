@@ -73,7 +73,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 26px;
+  gap: 1px;
   flex-wrap: wrap;
 }
 
@@ -152,7 +152,7 @@ body {
 
 .backdrop { position:fixed; inset:0; background: rgba(0,0,0,.4); display:flex; align-items:center; justify-content:center; padding: 16px; }
 .hidden { display:none; }
-.modal { background:#fff; border-radius: 14px; width:min(610px, 100%); padding: 14px; color: #111; }
+.modal { background:#fff; border-radius: 14px; width:min(620px, 100%); padding: 14px; color: #111; }
 .modalTitle { font-weight: 700; margin-bottom: 10px; }
 .modalBody { margin-bottom: 12px; }
 .modalFooter { display:flex; gap:8px; justify-content:flex-end; }

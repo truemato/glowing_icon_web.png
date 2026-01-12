@@ -55,6 +55,18 @@ async function bootstrap() {
   });
 }
 
+function buildOutputFilename(options) {
+  const pad2 = (n) => String(n).padStart(2, "0");
+  const now = new Date();
+  const date = `${now.getFullYear()}${pad2(now.getMonth() + 1)}${pad2(now.getDate())}`;
+  const time = `${pad2(now.getHours())}${pad2(now.getMinutes())}${pad2(now.getSeconds())}`;
+  const cs = pad2(Math.floor(now.getMilliseconds() / 10));
+  const [r, g, b] = options.bg;
+  const tol = options.tolerance;
+  const strength = options.strength.toFixed(2);
+  return `glow_rgb${r},${g},${b}_tol${tol}_s${strength}_${date}_${time}.${cs}.png`;
+}
+
 function disableInputs() {
   dom.btnOpen.disabled = true;
   dom.btnOptions.disabled = true;
@@ -88,7 +100,10 @@ async function handleFile(file) {
     // After表示 & DL
     const afterUrl = URL.createObjectURL(outBlob);
     setImgSrc(dom.imgAfter, afterUrl);
-    setDownloadFromBlob(dom.downloadLink, outBlob, "output.png");
+    const outputName = buildOutputFilename(appState.options);
+    if (dom.downloadLink) {
+      setDownloadFromBlob(dom.downloadLink, outBlob, outputName);
+    }
   } catch (e) {
     showError(String(e?.message ?? e));
     return;
