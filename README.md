@@ -2,7 +2,7 @@
 
 URL:https://truemato.github.io/glowing_icon_web.png/
 
-HDRを画像に埋め込んで光らせる\
+HDRを画像に埋め込んで光らせる
 
 PNGに Rec2020/PQ (HDR) ICCプロファイルを埋め込みつつ、背景色に近いピクセルだけを倍率で調整して
 「ブラウザで見ると発光して見える」画像を作ります。\
